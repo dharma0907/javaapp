@@ -19,7 +19,7 @@ pipeline{
                 withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_pass')]) {
     
                    sh '''
-                      docker built -t 34.30.190.18:8083/springapp:${VERSION} .
+                      docker build -t 34.30.190.18:8083/springapp:${VERSION} .
                       echo "pushing image"
                       docker login -u admin -p $docker_pass 34.30.190.18:8083
                       docker push 34.30.190.18:8083/springapp:${VERSION}
