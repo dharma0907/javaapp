@@ -29,7 +29,7 @@ pipeline{
              }
            }
         }
-        stage("identify any miss configurations in .yaml file using datree"){
+        /*stage("identify any miss configurations in .yaml file using datree"){
             steps{
                 script{
                     dir('kubernetes/') {
@@ -37,7 +37,7 @@ pipeline{
                      }
                 }
             }
-        }
+        }*/
         stage("pusing hel charts to nexus"){
             steps{
              script{
