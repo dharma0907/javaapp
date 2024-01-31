@@ -28,7 +28,15 @@ pipeline{
                 }
              }
            }
-             
+        }
+        stage("identify any miss configurations in .yaml file using datree"){
+            steps{
+                script{
+                    dir('kubernetes/') {
+                           sh 'helm datree test myapp/'
+                     }
+                }
+            }
         }
 
 
