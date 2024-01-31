@@ -1,10 +1,9 @@
 pipeline{
-    agent{
-        any
+    agent any
         environment{
             VERSION = "${env.BUILD_ID}"
+        
         }
-    }
     stages{
         stage("pulling jenkins file from scm"){
             steps{
