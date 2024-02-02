@@ -61,7 +61,7 @@ pipeline{
              }
            }
         }
-         stage('Deploying application on k8s cluster') {
+         /*stage('Deploying application on k8s cluster') {
             steps {
                script{
                   withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'sample', contextName: '', credentialsId: 'secret_token', namespace: 'default', serverUrl: '']]) {
@@ -74,10 +74,26 @@ pipeline{
                    }
                }
             }
+        }*/
+        stage('k8 deploy'){
+            steps{
+                sshagent(['k8s']) {
+                 sh '''
+                   echo 'enter into k8 cluster'
+                   pwd
+                   kubectl get nodes
+                   ''' 
+                   }
+     
+    
+                }
+
+
+            }
+ 
+
         }
 
 
 
     }
-   
-}
