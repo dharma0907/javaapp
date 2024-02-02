@@ -21,7 +21,7 @@ pipeline{
                    sh '''
                       docker build -t 34.66.112.225:8083/springapp:${VERSION} .
                       echo "pushing image"
-                      docker login -u admin -p $docker_pass 34.66.112.225:8083
+                      docker login -u admin -p $docker_pass :8083
                       docker push 34.66.112.225:8083/springapp:${VERSION}
                       docker rmi 34.66.112.225:8083/springapp:${VERSION}
                     '''
@@ -64,7 +64,7 @@ pipeline{
          stage('Deploying application on k8s cluster') {
             steps {
                script{
-                  withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'sample', contextName: '', credentialsId: 'mykubeconfig', namespace: '', serverUrl: '']]) {
+                  withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'sample', contextName: '', credentialsId: 'secret_token', namespace: 'default', serverUrl: '']]) {
                    dir('kubernetes/') {
                           sh 'helm upgrade --install --set image.repository="34.66.112.225:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
                         }
