@@ -64,8 +64,8 @@ pipeline{
          stage('Deploying application on k8s cluster') {
             steps {
                script{
-                  //withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'sample', contextName: '', credentialsId: 'secret_token', namespace: 'default', serverUrl: 'https:10.128.0.3:6443']]) {
-                   withKubeConfig(caCertificate: '', clusterName: 'master1', contextName: '', credentialsId: 'secret_token', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: '') {
+                  withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'sample', contextName: '', credentialsId: 'secret_token', namespace: 'default', serverUrl: '']]) {
+                   //withKubeConfig(caCertificate: '', clusterName: 'master1', contextName: '', credentialsId: 'secret_token', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: '') {
                    sh '''
                    echo 'enter into k8 cluster'
                    pwd
