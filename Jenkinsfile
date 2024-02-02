@@ -67,6 +67,7 @@ pipeline{
                   withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'sample', contextName: '', credentialsId: 'secret_token', namespace: 'default', serverUrl: '']]) {
                    sh '''
                    echo 'enter into k8 cluster'
+                   pwd
                    kubectl get nodes
                    '''
                    /*dir('kubernetes/') {
