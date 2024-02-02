@@ -65,10 +65,15 @@ pipeline{
             steps {
                script{
                   withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'sample', contextName: '', credentialsId: 'secret_token', namespace: 'default', serverUrl: '']]) {
-                   dir('kubernetes/') {
+                   sh '''
+                   echo 'enter into k8 cluster'
+                   kubetl get nodes
+                   '''
+                   /*dir('kubernetes/') {
                           echo 'enter into k8 cluster'
-                          sh 'helm upgrade --install --set image.repository="34.66.112.225:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
-                        }
+                          //sh 'helm upgrade --install --set image.repository="34.66.112.225:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
+                          kubetl get nodes
+                        }*/
                    }
                }
             }
