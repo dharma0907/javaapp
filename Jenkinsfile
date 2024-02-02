@@ -64,17 +64,13 @@ pipeline{
          stage('Deploying application on k8s cluster') {
             steps {
                script{
-                  withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'sample', contextName: '', credentialsId: 'secret_token', namespace: 'default', serverUrl: '']]) {
+                  //withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'sample', contextName: '', credentialsId: 'secret_token', namespace: 'default', serverUrl: 'https:10.128.0.3:6443']]) {
+                   withKubeConfig(caCertificate: '', clusterName: 'master1', contextName: '', credentialsId: 'secret_token', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: '') {
                    sh '''
                    echo 'enter into k8 cluster'
                    pwd
                    kubectl get nodes
-                   '''
-                   /*dir('kubernetes/') {
-                          echo 'enter into k8 cluster'
-                          //sh 'helm upgrade --install --set image.repository="34.66.112.225:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
-                          kubetl get nodes
-                        }*/
+                   ''' 
                    }
                }
             }
