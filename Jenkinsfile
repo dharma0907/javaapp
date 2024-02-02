@@ -78,11 +78,13 @@ pipeline{
         stage('k8 deploy'){
             steps{
                 sshagent(['k8s']) {
+                script{
                  sh '''
                    echo 'enter into k8 cluster'
                    pwd
                    kubectl get nodes
                    ''' 
+                }
                    }
      
     
